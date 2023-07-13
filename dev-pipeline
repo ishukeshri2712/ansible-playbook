@@ -7,10 +7,10 @@ pipeline {
     }
         
     stages {
-        stage('Cheking Disk Space and Sending Alert') {
+        stage('FileRestart And Cache Removal') {
             steps {
                 sh '''
-                    ansible-playbook -i ./inventories/dev_inventory/aws_ec2.yml --private-key=${ANSIBLE_PRIVATE_KEY} ./playbooks/disk_space_alert.yml --extra-vars "env=dev"  
+                    ansible-playbook -i ./inventories/dev_inventory/aws_ec2.yml --private-key=${ANSIBLE_PRIVATE_KEY} ./playbooks/file_beat_restart.yml --extra-vars "env=dev"  
                 '''
             }
         }
