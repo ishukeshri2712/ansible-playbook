@@ -1,0 +1,18 @@
+plugin: amazon.aws.aws_ec2
+regions:
+  - us-west-1
+include_filters:
+- tag:aws:autoscaling:groupName:
+  - 'dev-tap-ecs-arm-asg'
+- tag:aws:autoscaling:groupName:
+  - 'dev-tap-ecs-pdf'
+- tag:aws:autoscaling:groupName:
+  - 'dev-tap-ecs-arm-spot-asg'
+- tag:aws:autoscaling:groupName:
+  - 'dev-tap-ecs-servers'
+- tag:aws:autoscaling:groupName:
+  - 'dev-tap-ecs-pdf-arm'
+- tag:aws:autoscaling:groupName:
+  - 'dev-tap-ecs-servers-amd-spot-asg'
+
+
