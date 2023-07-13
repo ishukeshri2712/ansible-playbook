@@ -1,6 +1,6 @@
 ---
 disk_device: "/dev/nvme0n1p1"
-webhook_url: "https://tekion.webhook.office.com/webhookb2/17a3733b-7214-4de6-8700-7286b5bcd2d8@861aedbb-44b4-4bcf-a125-49fa7baf1e26/IncomingWebhook/79da5a7926c94bf497fc9c4a8beecced/12c226ed-d4f1-478f-ac64-941fdf92dc0b"
+webhook_url: ""
 env_cluster:
   test: test-cluster
   dev: dev-cluster
