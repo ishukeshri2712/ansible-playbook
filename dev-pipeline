@@ -1,0 +1,18 @@
+pipeline {
+    agent {
+        label "jenkins-arm-slave"
+    }
+    environment {
+        ANSIBLE_PRIVATE_KEY = credentials('ANSIBLE_PRIVATE_KEY')
+    }
+        
+    stages {
+        stage('Cheking Disk Space and Sending Alert') {
+            steps {
+                sh '''
+                    ansible-playbook -i ./inventories/dev_inventory/aws_ec2.yml --private-key=${ANSIBLE_PRIVATE_KEY} ./playbooks/disk_space_alert.yml --extra-vars "env=dev"  
+                '''
+            }
+        }
+    }
+}
