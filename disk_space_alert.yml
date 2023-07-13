@@ -1,0 +1,33 @@
+- name: Playbook for Checking Disk Space and Alert
+  hosts: all
+  gather_facts: true
+  user: ec2-user
+  become: true
+  vars_files:
+    - vars/vars.yml
+  tasks:
+    - name: Check disk space usage
+      shell: "df -h --output=pcent {{ disk_device }} | awk 'NR==2{gsub(/%/, \"\", $1); print $1}'"
+      register: disk_usage
+    - name: Print disk usage
+      debug:
+        var: disk_usage.stdout
+    - name: Removing the Disk Space if it is greater than 80%
+      shell: "docker image prune --all --force"
+      when: disk_usage.stdout | int > 80
+    - name: Disk Space of after removing the unwanted images
+      shell: "df -h --output=pcent {{ disk_device }} | awk 'NR==2{gsub(/%/, \"\", $1); print $1}'"
+      register: disk_usage_after_removal
+    - name: Print disk usage
+      debug:
+        var: disk_usage_after_removal.stdout
+    - name: Trigger webhook if disk usage exceeds 80%
+      uri:
+        url: "{{ webhook_url }}"
+        method: POST
+        body_format: json
+        body:
+          text: "Disk space of {{ inventory_hostname }} was eariler {{ disk_usage.stdout }} % . Now It is {{ disk_usage_after_removal.stdout}}% after the removing the unwanted images in {{ecs_cluster}}"
+      when: disk_usage.stdout | int > 80
+      vars:
+        ecs_cluster: "{{ env_clusters[env] }}"

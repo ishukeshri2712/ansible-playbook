@@ -1,0 +1,23 @@
+- name: Playbook for filebeat restart and cache removal
+  hosts: all
+  gather_facts: false
+  user: ec2-user
+  become: true
+  tasks:
+    - name: Restart Filebeat
+      service:
+        name: filebeat
+        state: stopped
+
+    - name: Clear Filebeat cache directory
+      file:
+        path: /var/lib/filebeat/registry
+        state: absent
+      register: cache_cleared
+      when: cache_cleared.changed | default(true)
+
+    - name: Start Filebeat service
+      service:
+        name: filebeat
+        state: started
+        
