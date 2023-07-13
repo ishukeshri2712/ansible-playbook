@@ -1,0 +1,9 @@
+# ansible-playbook
+This page explains how to run ansible playbook using dynamic inventory on the basis of autoscaling group and running the main playbook using that dynamic inventory and running that playbook using Jenkins job itself.
+Jenkins node have outbound rules for ECS instances to connect.
+- ECS instances have the necessary inbound rules for traffic to come through jenkins node.
+- Python, Ansible and others dependencies like boto3, botocore should be installed. ore 
+-Dynamic inventory plugin should be installed and make sure to enable it in the config file.
+-Filter plugin should also be enabled and host_key_checking you can set it to false in config file.
+Reference-
+https://docs.ansible.com/ansible/latest/collections/amazon/aws/aws_ec2_inventory.html
