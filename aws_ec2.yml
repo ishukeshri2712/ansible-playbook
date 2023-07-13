@@ -3,16 +3,15 @@ regions:
   - us-west-1
 include_filters:
 - tag:aws:autoscaling:groupName:
-  - 'dev-tap-ecs-arm-asg'
+  - 'XXXXX'
 - tag:aws:autoscaling:groupName:
-  - 'dev-tap-ecs-pdf'
+  - 'XXXXX'
 - tag:aws:autoscaling:groupName:
-  - 'dev-tap-ecs-arm-spot-asg'
+  - 'XXXXX'
 - tag:aws:autoscaling:groupName:
-  - 'dev-tap-ecs-servers'
+  - 'XXXXX'
 - tag:aws:autoscaling:groupName:
-  - 'dev-tap-ecs-pdf-arm'
-- tag:aws:autoscaling:groupName:
-  - 'dev-tap-ecs-servers-amd-spot-asg'
+  - 'XXXXXXX'
+
 
 
