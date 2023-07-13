@@ -15,4 +15,12 @@ pipeline {
             }
         }
     }
+
+post {
+    always {
+        office365ConnectorSend color: '#33FF3E', message: "## Filebeat Restarted For DEVt\n", status: "${currentBuild.currentResult}", webhookUrl: "$FILE_BEAT_WEB_HOOK"
+          }
+      }
+
+
 }
